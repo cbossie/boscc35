@@ -13,19 +13,30 @@ public class Functions
 {
     private ICodeCampService _codeCampService;
 
-    /// <summary>
-    /// Default constructor.
-    /// </summary>
-    /// <remarks>
-    /// The <see cref="ICodeCampService"/> implementation that we
-    /// instantiated in <see cref="Startup"/> will be injected here.
-    /// 
-    /// As an alternative, a dependency could be injected into each 
-    /// Lambda function handler via the [FromServices] attribute.
-    /// </remarks>
     public Functions(ICodeCampService calculatorService)
     {
         _codeCampService = calculatorService;
     }
 
+    [HttpApi(LambdaHttpMethod.Get, "/CodeCamp/{id}")]
+    [LambdaFunction(MemorySize = 1024, ResourceName = "CC35AnnotationsGetCodeCamp")]
+    public string GetCodeCamp(int id, ILambdaContext context)
+    {
+        return _codeCampService.GetCodeCampName(id);
+    }
+
+
+    [HttpApi(LambdaHttpMethod.Get, "/CodeCampSlogan/{id}")]
+    [LambdaFunction(MemorySize = 1024, ResourceName = "CC35AnnotationsGetCodeCampSlogan")]
+    public string GetCodeCampSlogan(int id, ILambdaContext context)
+    {
+        return _codeCampService.GetSlogan(id);
+    }
+
+    [HttpApi(LambdaHttpMethod.Post, "/CodeCamp")]
+    [LambdaFunction(MemorySize = 1024, ResourceName = "CC35AnnotationsPostCodeCamp")]
+    public string PostCodeCamp([FromBody] int id, ILambdaContext context)
+    {
+        return _codeCampService.AddCodeCamp(id);
+    }
 }

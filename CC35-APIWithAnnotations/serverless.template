@@ -2,7 +2,95 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Transform": "AWS::Serverless-2016-10-31",
   "Description": "An AWS Serverless Application. This template is partially managed by Amazon.Lambda.Annotations (v1.0.0.0).",
-  "Resources": {},
+  "Resources": {
+    "CC35AnnotationsGetCodeCamp": {
+      "Type": "AWS::Serverless::Function",
+      "Metadata": {
+        "Tool": "Amazon.Lambda.Annotations",
+        "SyncedEvents": [
+          "RootGet"
+        ]
+      },
+      "Properties": {
+        "Runtime": "dotnet6",
+        "CodeUri": ".",
+        "MemorySize": 1024,
+        "Timeout": 30,
+        "Policies": [
+          "AWSLambdaBasicExecutionRole"
+        ],
+        "PackageType": "Zip",
+        "Handler": "CC35-APIWithAnnotations::CC35_APIWithAnnotations.Functions_GetCodeCamp_Generated::GetCodeCamp",
+        "Events": {
+          "RootGet": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/CodeCamp/{id}",
+              "Method": "GET"
+            }
+          }
+        }
+      }
+    },
+    "CC35AnnotationsGetCodeCampSlogan": {
+      "Type": "AWS::Serverless::Function",
+      "Metadata": {
+        "Tool": "Amazon.Lambda.Annotations",
+        "SyncedEvents": [
+          "RootGet"
+        ]
+      },
+      "Properties": {
+        "Runtime": "dotnet6",
+        "CodeUri": ".",
+        "MemorySize": 1024,
+        "Timeout": 30,
+        "Policies": [
+          "AWSLambdaBasicExecutionRole"
+        ],
+        "PackageType": "Zip",
+        "Handler": "CC35-APIWithAnnotations::CC35_APIWithAnnotations.Functions_GetCodeCampSlogan_Generated::GetCodeCampSlogan",
+        "Events": {
+          "RootGet": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/CodeCampSlogan/{id}",
+              "Method": "GET"
+            }
+          }
+        }
+      }
+    },
+    "CC35AnnotationsPostCodeCamp": {
+      "Type": "AWS::Serverless::Function",
+      "Metadata": {
+        "Tool": "Amazon.Lambda.Annotations",
+        "SyncedEvents": [
+          "RootPost"
+        ]
+      },
+      "Properties": {
+        "Runtime": "dotnet6",
+        "CodeUri": ".",
+        "MemorySize": 1024,
+        "Timeout": 30,
+        "Policies": [
+          "AWSLambdaBasicExecutionRole"
+        ],
+        "PackageType": "Zip",
+        "Handler": "CC35-APIWithAnnotations::CC35_APIWithAnnotations.Functions_PostCodeCamp_Generated::PostCodeCamp",
+        "Events": {
+          "RootPost": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/CodeCamp",
+              "Method": "POST"
+            }
+          }
+        }
+      }
+    }
+  },
   "Outputs": {
     "ApiURL": {
       "Description": "API endpoint URL for Prod environment",
